@@ -1,0 +1,53 @@
+# importar bibliotecas
+import numpy as np
+import pandas as pd
+import networkx as nx
+import matplotlib.pyplot as plt
+
+G = nx.barabasi_albert_graph(10, 3)
+nx.draw(G, with_labels=True)
+plt.show()
+
+# degree of each node link number that each node has
+degrees = [deg for node, deg in nx.degree(G)]
+print(degrees)
+
+# kmin - minimum degree
+kmin = np.min(degrees)
+# kmax - maximum degree
+kmax = np.max(degrees)
+# kavg - average degree
+kavg = np.mean(degrees)
+
+nx.shortest_path(G,1,2)
+nx.shortest_path(G,1,2, weight=True)
+
+# triangles
+nx.triangles(G)
+# clustering coefficient of a node
+nx.clustering(G)
+# clustering coefficient of all nodes (returns a dictionary)
+nx.clustering(G)
+# clustering coefficient of the network
+cc = nx.clustering(G)
+avg_clust = sum(cc.values()) / len(cc)
+print(avg_clust)
+# betweenness centrality of network
+nx.betweenness_centrality(G)
+# closeness centrality of network
+nx.closeness_centrality(G)
+# eigenvector centrality of network
+nx.eigenvector_centrality(G)
+# degree centrality
+nx.degree_centrality(G)
+# find number of connected components
+nx.number_connected_components(G)
+# get the nodes in the same component as n
+nx.node_connected_component(G, 3)
+# Assortativity
+# Pearson correlation coefficient [-1; 1]
+# Social networks are highly assortative (homophily): high degree
+# nodes connect to other high degree nodes
+# technological are disassortative: high degree nodes connect to low
+# degree nodes
+nx.degree_assortativity_coefficient(G)
